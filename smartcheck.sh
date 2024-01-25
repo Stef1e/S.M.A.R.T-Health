@@ -1,8 +1,13 @@
 #!/bin/bash
-banner_text="This is a Work in Progress"
-
-#sudo yum install -y figlet > /dev/null 2>&1
-#figlet -f small "$banner_text" | sed 's/./\x1b[37m&\x1b[0m/g'
+#
+# File:     S.M.A.R.T-Health.sh
+#
+# Purpose:  Scan/Diagnose Drive related issues
+#
+# Author:   Steven Fleming
+#           <sfleming@hivelocity.net>
+#
+# License:  GPL version 2
 
 # Determine which package manager to use based on whether the system is RHEL or Debian-based
 if [[ -f /etc/redhat-release ]]; then
