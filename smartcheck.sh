@@ -96,6 +96,12 @@ for drive in $drives; do
             echo "Error on $drive: num_err_log_entries"
         fi
 
+        # Check if Power on Hours is above 60k
+        if [[ $nvme_pwr_on_hrs -gt 0 ]]; then
+            #Print an error message
+            echo "Please check integrity on $drive: nvme_pwr_on_hrs"
+        fi
+
         # Extract the values of the relevant attributes from the error-log output
         error_count=$(echo "$error_log_output" | awk '/error_count/ {print $3}')
         last_error_timestamp=$(echo "$error_log_output" | awk '/last_error_timestamp/ {print $3}')
