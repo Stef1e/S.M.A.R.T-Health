@@ -70,6 +70,7 @@ for drive in $drives; do
         temperature=$(echo "$smart_log_output" | awk '/temperature/ {print $3}')
         media_errors=$(echo "$smart_log_output" | awk '/media_errors/ {print $3}')
         num_err_log_entries=$(echo "$smart_log_output" | awk '/num_err_log_entries/ {print $3}')
+        nvme_pwr_on_hrs=$(echo "$smart_log_output" | awk '/power_on_hours/ {print $3}')
 
         # Check if the available_spare_threshold is below 10
         if [[ "$available_spare_threshold" -lt 10 ]]; then
