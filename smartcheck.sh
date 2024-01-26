@@ -9,6 +9,12 @@
 #
 # License:  GPL version 2
 
+# Privilage check
+if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run with sudo. Exiting."
+    exit 1
+fi
+
 # Determine which package manager to use based on whether the system is RHEL or Debian-based
 if [[ -f /etc/redhat-release ]]; then
   PACKAGE_MANAGER="yum"
@@ -56,8 +62,8 @@ for drive in $drives; do
     # Check if the drive is an NVMe drive
     if echo "$drive" | grep -q "nvme"; then
         # Run the nvme smart-log and nvme error-log commands on the drive
-        smart_log_output=$(nvme smart-log "$drive")
-        error_log_output=$(nvme error-log "$drive")
+        smart_log_output="$(nvme smart-log "$drive")"
+        error_log_output="$(nvme error-log "$drive")"
 
         # Extract the values of the relevant attributes from the smart-log output
         available_spare_threshold=$(echo "$smart_log_output" | awk '/available_spare_threshold/ {print $3}')
@@ -66,7 +72,7 @@ for drive in $drives; do
         num_err_log_entries=$(echo "$smart_log_output" | awk '/num_err_log_entries/ {print $3}')
 
         # Check if the available_spare_threshold is below 10
-        if [[ $available_spare_threshold -lt 10 ]]; then
+        if [[ "$available_spare_threshold" -lt 10 ]]; then
             # Print an error message
             echo "Error on $drive: available_spare_threshold"
         fi
