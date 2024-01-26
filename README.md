@@ -6,7 +6,7 @@
 
 ## Description
 
-This bash script performs a S.M.A.R.T health analysis of all installed drives within the server interface through SCSI or PCI-e lanes.
+This bash script performs a S.M.A.R.T health analysis of all installed drives within the server interface through ATA or NVMe.
 
 
 ## Usage
