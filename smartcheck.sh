@@ -15,11 +15,13 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-# Determine which package manager to use based on whether the system is RHEL or Debian-based
+# Determine which package manager to use based on whether the system is RHEL, Debian-based, or Arch
 if [[ -f /etc/redhat-release ]]; then
   PACKAGE_MANAGER="yum"
 elif [[ -f /etc/debian_version ]]; then
   PACKAGE_MANAGER="apt-get"
+elif [[ -f /etc/pacman.conf ]]; then
+  PACKAGE_MANAGER="pacman"
 else
   echo "Unable to determine package manager"
   exit 1
@@ -33,6 +35,9 @@ elif [[ "$PACKAGE_MANAGER" == "apt-get" ]]; then
   # Install Smartmontools on Debian-based systems using apt-get
   sudo $PACKAGE_MANAGER update
   sudo $PACKAGE_MANAGER install smartmontools -y
+elif [[ "$PACKAGE_MANAGER" == "pacman" ]]; then
+  # Install Smartmontools on ArchLinux based systems using Pacman
+  sudo $PACKAGE_MANAGER -S smartmontools --noconfirm
 fi
 
 # Set the options for the smartctl command
