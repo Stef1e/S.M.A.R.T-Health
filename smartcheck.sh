@@ -2,7 +2,7 @@
 #
 # File:     S.M.A.R.T-Health.sh
 #
-# Purpose:  Scan/Diagnose Drive related issues
+# Purpose:  Scan/Diagnose Drive related issues reported through S.M.A.R.T
 #
 # Author:   Steven Fleming
 #           <sfleming@hivelocity.net>
