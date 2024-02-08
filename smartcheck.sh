@@ -44,7 +44,7 @@ fi
 options="-a"
 
 # Get a list of all drives
-drives=$(smartctl --scan | cut -f1)
+drives=$(smartctl --scan | awk '{print $1}')
 
 # Check if a hardware RAID controller is present
 if lspci | grep -q "RAID"; then
